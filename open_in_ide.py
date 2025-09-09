@@ -24,8 +24,7 @@ class OpenInIDEExtension(GObject.GObject, Nautilus.MenuProvider):
         try:
             # Always use shell=False for security
             # Handle special characters by escaping them properly
-            if any(char in IDE_COMMAND for char in ['>', '<', '|', '&', ';', '(', ')', '
-]):
+            if any(char in IDE_COMMAND for char in ['>', '<', '|', '&', ';', '(', ')', '$']):
                 # For complex commands, use shlex.quote for proper escaping
                 command_parts = shlex.split(IDE_COMMAND)
                 # Replace $TARGET placeholder safely
