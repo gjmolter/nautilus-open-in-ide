@@ -11,7 +11,7 @@ A Python extension for the Nautilus file manager that adds a right-click context
 ## Requirements
 
 **Python Bindings for Nautilus**: You must have the `python3-nautilus` package installed. This package allows Python scripts to interact with Nautilus.
-**IDE Installation**: By default it calls the `code` command, but you can configure it for any IDE.
+**IDE**: By default it calls the `code` command, but you can configure it for any IDE.
 
 Might not be compatible with some Nautilus versions, works for me on v46.
 
