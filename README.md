@@ -19,7 +19,7 @@ Might not be compatible with some Nautilus versions, works for me on v46.
 
 You can install it quickly by opening a terminal in this folder and running:
 
-````bash
+```bash
 chmod +x ./install.sh
 sudo ./install.sh
 ```
@@ -36,7 +36,7 @@ First, install the necessary Python bindings for Nautilus using your distributio
   ```bash
   sudo apt update
   sudo apt install python3-nautilus
-````
+  ```
 
 - **For Fedora:**
 
