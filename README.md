@@ -21,7 +21,7 @@ You can install it quickly by opening a terminal in this folder and running:
 
 ```bash
 chmod +x ./install.sh
-sudo ./install.sh
+./install.sh
 ```
 
 > Quick Reminder: Always read scripts you get from random people on the internet (like me) before running them.
@@ -82,7 +82,7 @@ The IDE command and label are set during installation. If you want to change the
 1.  **Re-run the installation script**:
 
     ```bash
-    sudo ./install.sh
+    ./install.sh
     ```
 
 2.  **Use environment variables**:
