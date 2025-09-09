@@ -76,6 +76,15 @@ case "$IDE_CHOICE" in
             echo "Error: Custom command cannot be empty. Aborting."
             exit 1
         fi
+        if [[ "$CUSTOM_CMD" =~ [\&\|\;\<\>\(\)] ]]; then
+            echo "Warning: The custom command contains special characters. This can be a security risk."
+            read -p "Are you sure you want to continue? (y/n): " -n 1 -r
+            echo
+            if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                echo "Aborting installation."
+                exit 1
+            fi
+        fi
         read -p "Enter the label for the menu item: " CUSTOM_LABEL
         if [ -z "$CUSTOM_LABEL" ]; then
             echo "Error: Custom label cannot be empty. Aborting."
@@ -110,7 +119,9 @@ fi
 echo "Extension directory: $INSTALL_DIR"
 
 echo "3. Creating the Nautilus extension script..."
-FINAL_PYTHON_SCRIPT=$(echo "$PYTHON_SCRIPT_TEMPLATE" | sed "s|IDE_COMMAND_PLACEHOLDER|$CHOSEN_IDE_CMD|g" | sed "s|IDE_LABEL_PLACEHOLDER|$IDE_LABEL|g")
+FINAL_PYTHON_SCRIPT=$(echo "$PYTHON_SCRIPT_TEMPLATE" | \
+    sed "s|IDE_COMMAND_PLACEHOLDER|$(printf '%s\n' "$CHOSEN_IDE_CMD" | sed 's/[[\\.^$()+?{|]/\\&/g')|g" | \
+    sed "s|IDE_LABEL_PLACEHOLDER|$(printf '%s\n' "$IDE_LABEL" | sed 's/[[\\.^$()+?{|]/\\&/g')|g")
 echo "$FINAL_PYTHON_SCRIPT" > "$INSTALL_DIR/$EXTENSION_FILE_NAME"
 if [ $? -ne 0 ]; then
     echo "Error: Could not write extension file '$INSTALL_DIR/$EXTENSION_FILE_NAME'."
